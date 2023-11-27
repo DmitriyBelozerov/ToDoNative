@@ -1,9 +1,20 @@
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 
 export function Todo(props) {
-    return <View key={props.index} style={styles.container}>
-        <Text>{props.text}</Text>
-    </View>
+
+    const handleLongPress = () => {
+        props.onRemove(props.item.id)
+    }
+
+    return (
+        <TouchableOpacity activeOpacity={0.5} onPress={()=>console.log(`press ${props.item.id}`)}
+        onLongPress={handleLongPress}
+        >
+            <View style={styles.container}>
+                <Text style={styles.text}>{props.item.title}</Text>
+            </View>
+        </TouchableOpacity>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -12,5 +23,8 @@ const styles = StyleSheet.create({
         borderBottomColor: '#00c0FF',
         borderStyle: 'solid',
         borderBottomWidth: 2
+    },
+    text: {
+        fontSize: 30
     }
 })
